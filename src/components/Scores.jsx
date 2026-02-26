@@ -3,6 +3,14 @@ function getScore(score) {
 }
 
 function Scores({courseName, courseResults}) {
+    const total = courseResults.reduce((sum, student) => {
+        return sum + student.score;
+    }, 0);
+
+    const average = total/courseResults.length;
+    const min = Math.min(...courseResults.map(student => student.score));
+    const max = Math.max(...courseResults.map(student => student.score));
+
     return(
         <>
         <div class="scores">
@@ -25,6 +33,21 @@ function Scores({courseName, courseResults}) {
                         <td className={getScore(students.score)}>{students.score}</td>
                     </tr>
                 ))}
+                <tr>
+                    <th>AVERAGE:</th>
+                    <th>{average.toFixed(2)}</th>
+                    <th>POINT</th>
+                </tr>
+                <tr>
+                    <th>MINIMUN:</th>
+                    <th>{min}</th>
+                    <th>POINT</th>
+                </tr>
+                <tr>
+                    <th>MAXIMUN:</th>
+                    <th>{max}</th>
+                    <th>POINT</th>
+                </tr>
             </tbody>
           </table>
         </div>
